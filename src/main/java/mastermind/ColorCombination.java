@@ -47,7 +47,7 @@ public class ColorCombination {
 
     private int determineRightColorWrongPosition(ColorCombination other){
         int aantal=0;
-        boolean[] gehad = new boolean[4];
+        boolean[] gehad = new boolean[pegs.length];
         for (int i=0; i<gehad.length;i++){
             gehad[i] = false;
         }
