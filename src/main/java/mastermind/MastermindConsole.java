@@ -10,23 +10,20 @@ public class MastermindConsole {
     private MastermindGame game = new MastermindGame();
     private static final String TAKEAGUESS = "Doe een gok:";
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MastermindConsole mastermindConsole = new MastermindConsole();
         mastermindConsole.play();
-
     }
 
-    public void play(){
+    public void play() {
 
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.print(TAKEAGUESS);
-            String guessAsString = scanner.nextLine();
+            String guessAsString = scanner.nextLine().toUpperCase();
             game.checkCombination(guessAsString);
-        }
-        while(!game.won());
-
-        System.out.println(game);
-
+            System.out.println(game);
+        } while (!game.won());
+        scanner.close();
     }
 }

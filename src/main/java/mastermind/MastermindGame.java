@@ -9,6 +9,7 @@ public class MastermindGame {
     private Hint hint;
     private int turn;
     private boolean won;
+    private String state;
 
     private static final int NROFPEGS = 4;
     private static final String WONINTEXT = "Gewonnen in ";
@@ -16,9 +17,9 @@ public class MastermindGame {
     private static final String NRCORRECT = "Aantal goed: ";
     private static final String NRWRONGPLACE = "Aantal op de verkeerde plaats: ";
 
-    public MastermindGame(){
+    public MastermindGame() {
         turn = 0;
-        won=false;
+        won = false;
         secretCode = new ColorCombination(NROFPEGS);
     }
 
@@ -27,20 +28,20 @@ public class MastermindGame {
 
         guess = new ColorCombination(guessAsString);
         hint = secretCode.compareWithOther(guess);
+        won = hint.getCorrect() == NROFPEGS;
 
-        System.out.println(NRCORRECT+hint.getCorrect());
-        System.out.println(NRWRONGPLACE+hint.getSemiCorrect());
-
-        won = hint.getCorrect()==NROFPEGS;
+        if (won) {
+            state = WONINTEXT + turn + TURNTEXT;
+        } else {
+            state = NRCORRECT + hint.getCorrect() + "\n" + NRWRONGPLACE + hint.getSemiCorrect();
+        }
     }
 
-    public boolean won(){
+    public boolean won() {
         return won;
     }
 
-    public String toString(){
-        return (WONINTEXT+turn+TURNTEXT);
+    public String toString() {
+        return state;
     }
-
-
 }

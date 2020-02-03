@@ -1,6 +1,5 @@
 package mastermind;
 
-
 import java.util.Random;
 
 /**
@@ -9,22 +8,34 @@ import java.util.Random;
 public class Peg {
     private PegColor color;
 
-    public Peg(char c){
-      switch (c){
-          case 'B': color = PegColor.BLUE; break;
-          case 'W': color = PegColor.WHITE; break;
-          case 'R': color = PegColor.RED; break;
-          case 'G': color = PegColor.GREEN; break;
-          case 'Z': color = PegColor.BLACK; break;
-          case 'Y': color = PegColor.YELLOW; break;
-      }
+    public Peg(char c) {
+        switch (c) {
+        case 'B':
+            color = PegColor.BLUE;
+            break;
+        case 'W':
+            color = PegColor.WHITE;
+            break;
+        case 'R':
+            color = PegColor.RED;
+            break;
+        case 'G':
+            color = PegColor.GREEN;
+            break;
+        case 'Z':
+            color = PegColor.BLACK;
+            break;
+        case 'Y':
+            color = PegColor.YELLOW;
+            break;
+        }
     }
 
-    public Peg(){
+    public Peg() {
         color = getRandomColor();
     }
 
-    private PegColor getRandomColor(){
+    private PegColor getRandomColor() {
         PegColor[] colors = PegColor.values();
         Random random = new Random();
         return (colors[random.nextInt(colors.length)]);
@@ -33,5 +44,4 @@ public class Peg {
     public PegColor getColor() {
         return color;
     }
-
 }

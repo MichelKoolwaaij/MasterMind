@@ -5,70 +5,64 @@ package mastermind;
  */
 public class ColorCombination {
 
-
     private Peg[] pegs;
 
     public ColorCombination(String guessAsString) {
 
         pegs = new Peg[guessAsString.length()];
-        for (int i=0; i<guessAsString.length();i++){
-            pegs[i]=new Peg(guessAsString.charAt(i));
+        for (int i = 0; i < guessAsString.length(); i++) {
+            pegs[i] = new Peg(guessAsString.charAt(i));
         }
-
     }
 
-    public ColorCombination(int nrOfPegs){
+    public ColorCombination(int nrOfPegs) {
         pegs = new Peg[nrOfPegs];
-        PegColor k;
 
-        for (int i=0; i<nrOfPegs;i++){
-            pegs[i]=new Peg();
+        for (int i = 0; i < nrOfPegs; i++) {
+            pegs[i] = new Peg();
         }
-
     }
 
-    public Hint compareWithOther (ColorCombination other){
+    public Hint compareWithOther(ColorCombination other) {
         Hint hint = new Hint();
         hint.setCorrect(determineRightColorRightPosition(other));
         hint.setSemiCorrect(determineRightColorWrongPosition(other));
         return hint;
-
     }
 
-    private int determineRightColorRightPosition(ColorCombination other){
-        int aantal=0;
-        for (int i=0; i<other.pegs.length;i++){
-            if (other.pegs[i].getColor() == pegs[i].getColor()){
-                aantal ++;
+    private int determineRightColorRightPosition(ColorCombination other) {
+        int count = 0;
+        for (int i = 0; i < other.pegs.length; i++) {
+            if (other.pegs[i].getColor() == pegs[i].getColor()) {
+                count++;
             }
         }
-        return aantal;
+        return count;
     }
 
-    private int determineRightColorWrongPosition(ColorCombination other){
-        int aantal=0;
-        boolean[] gehad = new boolean[pegs.length];
-        for (int i=0; i<gehad.length;i++){
-            gehad[i] = false;
+    private int determineRightColorWrongPosition(ColorCombination other) {
+        int count = 0;
+        boolean[] done = new boolean[pegs.length];
+        for (int i = 0; i < done.length; i++) {
+            done[i] = false;
         }
 
-        for (int i=0; i<other.pegs.length;i++){
-            for(int j=0; j< other.pegs.length;j++){
-                if ((other.pegs[i].getColor()==pegs[j].getColor()) && !gehad[j]){
-                    if (j!=i) {
-                        aantal++;
+        for (int i = 0; i < other.pegs.length; i++) {
+            for (int j = 0; j < other.pegs.length; j++) {
+                if ((other.pegs[i].getColor() == pegs[j].getColor()) && !done[j]) {
+                    if (j != i) {
+                        count++;
                     }
-                    gehad[j] = true;
+                    done[j] = true;
                     break;
                 }
             }
         }
 
-        return aantal;
-
+        return count;
     }
+
     public Peg[] getPegs() {
         return pegs;
     }
-
 }
