@@ -33,6 +33,7 @@ public class ColorCombination {
     private int determineRightColorRightPosition(ColorCombination other) {
         int count = 0;
         for (int i = 0; i < other.pegs.length; i++) {
+
             if (other.pegs[i].getColor() == pegs[i].getColor()) {
                 count++;
             }

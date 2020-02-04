@@ -1,0 +1,40 @@
+@startuml
+
+class MasterMindConsole
+class MasterMindGame
+class Hint
+class ColorCombination
+class Peg
+enum PegColor
+
+MasterMindConsole "1" --> "1" MasterMindGame
+MasterMindGame "1" --> "1" Hint
+MasterMindGame "1" --> "1" ColorCombination
+MasterMindGame "1" --> "1" ColorCombination
+ColorCombination "1" --> "*" Peg
+
+class MasterMindConsole{
+  +play():void
+}
+
+class MasterMindGame{
+ -turn:int
+ -won:boolean
+ -state:String
+ +checkCombination(String guessAsString):void
+ +won():boolean
+
+}
+
+class ColorCombination{
+ +compareWithOther(other: ColorCombination):Hint
+ +determineRightColorRightPosition(ColorCombination other):int
+ +determineRightColorWrongPosition(ColorCombination other):int
+}
+
+class Hint{
+ -correct: int
+ -semicorrect: int
+}
+
+@enduml
