@@ -5,13 +5,12 @@ class MasterMindGame
 class Hint
 class ColorCombination
 class Peg
-enum PegColor
 
-MasterMindConsole "1" --> "1" MasterMindGame
-MasterMindGame "1" --> "1" Hint
-MasterMindGame "1" --> "1" ColorCombination
-MasterMindGame "1" --> "1" ColorCombination
-ColorCombination "1" --> "*" Peg
+MasterMindConsole "1" --> "1" MasterMindGame : plays
+MasterMindGame "1" --> "1" Hint : shows
+MasterMindGame "1" --> "1" ColorCombination : checks
+MasterMindGame "1" --> "1" ColorCombination : has secret
+ColorCombination "1" --> "*" Peg : exists of
 
 class MasterMindConsole{
   +play():void
