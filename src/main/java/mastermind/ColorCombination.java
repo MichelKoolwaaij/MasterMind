@@ -1,5 +1,8 @@
 package mastermind;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Created by Michel Koolwaaij on 21-02-19.
  */
@@ -43,19 +46,29 @@ public class ColorCombination {
 
     private int determineRightColorWrongPosition(ColorCombination other) {
         int count = 0;
-        boolean[] done = new boolean[pegs.length];
-        for (int i = 0; i < done.length; i++) {
-            done[i] = false;
+
+        ArrayList<Peg> guessed = new ArrayList<>();
+        ArrayList<Peg> comb = new ArrayList<>();
+        // First filter the good guesses
+        for (int i = 0; i < other.pegs.length; i++) {
+
+            if (other.pegs[i].getColor() != pegs[i].getColor()) {
+                guessed.add(other.pegs[i]);
+                comb.add(pegs[i]);
+            }
         }
 
-        for (int i = 0; i < other.pegs.length; i++) {
-            for (int j = 0; j < other.pegs.length; j++) {
-                if ((other.pegs[i].getColor() == pegs[j].getColor()) && !done[j]) {
-                    if (j != i) {
-                        count++;
-                    }
-                    done[j] = true;
-                    break;
+        // Now check the other guesses.
+        // We only want to compare the remaining guesses and pegs
+        // When found remove the peg from the remaining list
+        for (Peg guess: guessed){
+            boolean found = false;
+            for (Iterator<Peg> iterator = comb.iterator(); iterator.hasNext();) {
+                Peg peg = iterator.next();
+                if ((peg.getColor() == guess.getColor()) && !found) {
+                    count++;
+                    iterator.remove();
+                    found = true;
                 }
             }
         }
