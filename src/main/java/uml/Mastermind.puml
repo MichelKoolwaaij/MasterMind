@@ -1,5 +1,6 @@
 @startuml
 
+
 class MasterMindConsole
 class MasterMindGame
 class Hint
@@ -11,6 +12,7 @@ MasterMindGame "1" --> "1" Hint : shows
 MasterMindGame "1" --> "1" ColorCombination : checks
 MasterMindGame "1" --> "1" ColorCombination : has secret
 ColorCombination "1" --> "*" Peg : exists of
+ColorCombination ..> Hint
 
 class MasterMindConsole{
   +play():void
